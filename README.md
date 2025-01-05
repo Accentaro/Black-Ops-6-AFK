@@ -1,5 +1,7 @@
 # AFK Black Ops 6 Bot
 
+![In Game Image](readme-imgs/ingame.png)
+
 ## Overview
 
 Advanced automation bot for Black Ops 6. Simulates human-like behavior by performing mouse movements, keyboard actions, and screen detections, allowing you to stay active in the game.
@@ -21,13 +23,16 @@ The script is fully configurable and utilizes Python libraries like 'pynput`, `p
 3. **Screen Detection**
    - Detect in-game UI elements such as mini map, kill feed, or match in progress icon using OpenCV template matching.
    - Automate responses to specific screen events like skipping kill cams or selecting loadouts.
+![Killcam](readme-imgs/killcam.png)
 
 4. **Recovery Mechanism**
    - Automatically rejoin matches if kicked or disconnected, with predefined mouse-click actions.
+![Kicked](readme-imgs/kicked.png)
 
 5. **Dynamic Status**
-   - Toggle pause/resume functionality using `F7` and `F8` keys.
-   - Monitor in-game activity and adjust behavior accordingly.
+   - Automatic Pause in menu and Resume in game
+   - Monitors in-game activity and adjusts behavior accordingly.
+   ![Menu](readme-imgs/menu.png)
 
 ---
 
