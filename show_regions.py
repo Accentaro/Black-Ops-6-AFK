@@ -7,6 +7,7 @@ image_regions = {
     'compass': (505, 22, 888, 38),
     'killcam': (851, 38, 219, 56),
     'killfeed': (154, 588, 155, 131),
+    'match_start': (1587, 193, 315, 39),
     'match_in_progress_logo': (1587, 193, 315, 39),
     'mini_map': (60, 63, 247, 248),
     'packet_burst': (35, 474, 53, 41),
@@ -15,9 +16,7 @@ image_regions = {
     'ui': (1659, 951, 204, 92),
     'compass_player': (167, 167, 28, 37),
     'AR_ammo': (1527, 1015, 42, 30),
-    'kicked_region': (500, 376, 921, 309),
-    'defeat': (155, 113, 113, 29),
-    'victory': (155, 113, 113, 29)
+    'kicked_region':(500, 376, 921, 309)
 }
 
 # Capture screenshot of the entire screen
@@ -43,3 +42,16 @@ cv.waitKey(0)
 
 # Close all OpenCV windows
 cv.destroyAllWindows()
+
+# Ask the user if they want to save the image
+ask_save = input("Would you like to save this image? [Y/n]: ").strip().lower()
+if ask_save == "y":
+    while True:
+        file_name = input("Give your image a name and extension (e.g., 'image.png' or 'image.jpg'): ").strip()
+        try:
+            cv.imwrite(file_name, frame)  # Save the image with the specified filename
+            print(f"Image saved as {file_name}")
+            break
+        except Exception:
+            print("Failed to save")
+
