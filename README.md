@@ -41,7 +41,7 @@ The script is fully configurable and utilizes Python libraries like 'pynput`, `p
 
 1. **Python Libraries**  
    Install the required libraries:
-   pip install requirements.txt
+   pip install -r requirements.txt
    or
    pip install pynput pyfiglet opencv-python pyautogui numpy pillow
 
