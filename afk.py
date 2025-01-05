@@ -32,7 +32,7 @@ YELLOW = "\033[93m"
 PURPLE = "\033[95m"
 RESET = "\033[0m"
 
-creator = "Created By - BackwoodsCart🍃"
+creator = "Created By - Cain"
 
 mouse_command_list = ["180", "360", "720", "90Left", "90Right", "45Left", "45Right", "RandomTurnSmall"]
 key_command_list = ["Sprint", "SlideR", "SlideL", "Crouch", "LayDown", "Back", "Inspect", "Jump", "Slide", "SlideBack"]
