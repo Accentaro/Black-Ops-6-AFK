@@ -6,7 +6,7 @@
 
 Advanced automation bot for Black Ops 6. Simulates human-like behavior by performing mouse movements, keyboard actions, and screen detections, allowing you to stay active in the game.
 
-The script is fully configurable and utilizes Python libraries like 'pynput`, `pyfiglet`, `cv2` (OpenCV), and `pyautogui` to handle inputs, screen detection, and automation.
+The script is fully configurable and utilizes Python libraries like `pynput, pyfiglet, cv2 (OpenCV), and pyautogui` to handle inputs, screen detection, and automation.
 
 **Use in modes that won't negatively affect other players: FFA, 10v10, Stakeout 24/7**
 ---
