@@ -1,3 +1,4 @@
+import atexit
 from pynput.mouse import Button, Controller as MouseController
 from pynput.keyboard import Key, Controller as KeyController, Listener
 import random
@@ -23,6 +24,7 @@ screen_height = user32.GetSystemMetrics(1)
 
 # Set Paused at Start
 paused = True
+force_paused = False
 
 
 GREEN = "\033[32m"
@@ -32,7 +34,7 @@ YELLOW = "\033[93m"
 PURPLE = "\033[95m"
 RESET = "\033[0m"
 
-creator = "Created By - Cain"
+creator = "Created By - Caden Warren"
 
 mouse_command_list = ["180", "360", "720", "90Left", "90Right", "45Left", "45Right", "RandomTurnSmall"]
 key_command_list = ["Sprint", "SlideR", "SlideL", "Crouch", "LayDown", "Back", "Inspect", "Jump", "Slide", "SlideBack"]
@@ -132,14 +134,14 @@ def perform_kicked_actions():
 
 
 def on_press(key):
-    global paused
+    global force_paused
     try:
         if key == Key.f7:
-            paused = True
-            print("Paused")
+            force_paused = True
+            print("Waiting for action to end to pause..")
         elif key == Key.f8:
-            paused = False
-            print("Resumed")
+            force_paused = False
+            print("Resuming...")
     except Exception as e:
         print(f"Error: {e}")
 
@@ -232,54 +234,72 @@ def main():
 
     mouse.position = (960, 540)
     time.sleep(3)
-    print("Waiting to get in a game..")
-    last_detected_time = time.time()  # Track the last time an image was detected
-    while True:
-        screenshot = pyautogui.screenshot()
-        frame = cv.cvtColor(np.array(screenshot), cv.COLOR_RGB2BGR)
+    print("Waiting to get in a game...")
+    while True: # Program Functionality Main Loop
+        if not force_paused:
+            last_detected_time = time.time()  # Track the last time an image was detected
+            while True:
+                if force_paused:
+                    break
+                screenshot = pyautogui.screenshot()
+                frame = cv.cvtColor(np.array(screenshot), cv.COLOR_RGB2BGR)
+                
+                if not force_paused:
+                    if ingame():
+                        last_detected_time = time.time()  # Reset Timer
+                        if paused:
+                            print(f"{GREEN}Image detected! Resuming...{RESET}")
+                            paused = False
+                    elif check_kicked(frame):  
+                        paused = True  # Pause the bot
+                        perform_kicked_actions()  # Searches for Match
+                        print(f"{GREEN}Kicked actions complete. Resuming search...{RESET}")
+                        last_detected_time = time.time()
+                    else:
+                        # Check if it's been n seconds since the last detection
+                        if time.time() - last_detected_time > 20: # adjust time as fit
+                            if not paused:
+                                print(f"{RED}No image detected for 20 seconds. Pausing...{RESET}")
+                                paused = True
+
+                if paused or force_paused:
+                    time.sleep(0.1)
+                    continue
+                
+                if mouse_enabled:
+                    random_turn = random.randint(-100, 100)
+                    move_mouse_relative(random_turn, 0)
+                    random_turn = random.randint(-100, 100)
+                    move_mouse_relative(random_turn, 0)
+
+                # Keyboard Actions
+                skd = get_key_commands(key_command_list)
+                do_key_command(skd)
+
+                # Mouse Actions
+                if mouse_enabled:
+                    smc = get_mouse_commands(mouse_command_list)
+                    do_mouse_command(smc)
+
+
+                shoot(mouse_click_list)
+                print("---------------------------------\n")
+                time.sleep(1.5)
+                keyboard.press("e")
+                keyboard.release("e")
+                continue
+
         
-
-        if ingame():
-            last_detected_time = time.time()  # Reset Timer
-            if paused:
-                print(f"{GREEN}Image detected! Resuming...{RESET}")
-                paused = False
-        elif check_kicked(frame):  
-            paused = True  # Pause the bot
-            perform_kicked_actions()  # Searches for Match
-            print(f"{GREEN}Kicked actions complete. Resuming search...{RESET}")
-            last_detected_time = time.time()
-        else:
-            # Check if it's been 5 seconds since the last detection
-            if time.time() - last_detected_time > 5:
-                if not paused:
-                    print(f"{RED}No image detected for 5 seconds. Pausing...{RESET}")
-                    paused = True
-
-        if paused:
-            time.sleep(0.1)
-            continue
         
-        if mouse_enabled:
-            random_turn = random.randint(-100, 100)
-            move_mouse_relative(random_turn, 0)
+        clear_console()
+        print(format.renderText("PAUSED"))
+        while force_paused:
+            if not force_paused:
+                clear_console()
+                print(format.renderText("RESUMED"))
+                print("Waiting to get in a game...")
+                break
 
-        # Keyboard Actions
-        skd = get_key_commands(key_command_list)
-        do_key_command(skd)
-
-        # Mouse Actions
-        if mouse_enabled:
-            smc = get_mouse_commands(mouse_command_list)
-            do_mouse_command(smc)
-
-
-        shoot(mouse_click_list)
-        print("---------------------------------\n")
-        time.sleep(1.5)
-        keyboard.press("e")
-        keyboard.release("e")
-        continue
 
 
 def header():
@@ -476,8 +496,8 @@ def shoot(mouse_click_list):
 
 
 if __name__ == "__main__":
-    
     listener = Listener(on_press=on_press)
     listener.start()
+    atexit.register(listener.stop)
     
     main()
