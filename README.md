@@ -57,6 +57,15 @@ Ensure your screen resolution matches the coordinates used in the script. Modify
 - Run the script: afk.py
 - Follow on-screen instructions to enable or disable mouse movements.
 
+## Custom App Icon
+- Right-Click afk.py
+- Create shortcut
+- Right-Click afk.py shortcut
+- click properties
+- click change icon
+- click Browse
+- Select an icon from the 'Icons' folder
+- Feel free to move it to your desktop and change the name from 'afk.py - shortcut'
   
 ## Important Notes
 - Customization: Adjust mouse sensitivity, regions, and thresholds for screen detection in the script as needed.
