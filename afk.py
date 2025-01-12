@@ -143,7 +143,7 @@ def on_press(key):
     try:
         if key == Key.f7:
             force_paused = True
-            print("\n                     Waiting for action to end to pause..")
+            print("Waiting for action to end to pause..".center(78))
         elif key == Key.f8:
             force_paused = False
             print("Resuming...".center(80))
@@ -232,8 +232,8 @@ def main():
     global paused
     cursor.hide()
     header()
-    time.sleep(1)
-    getpass.getpass("\n\n                            Press Enter to continue...")
+    print("\n\n")
+    getpass.getpass("Press Enter to continue...".center(82))
     clear_console()
     cursor.show()
     mouse_enabled = enable_mouse()
@@ -305,7 +305,7 @@ def main():
             if not force_paused:
                 clear_console()
                 print(colored(format.renderText("RESUMED"), "green"))
-                print("                           Waiting to get in a game...")
+                print("Waiting to get in a game...".center(80))
                 break
 
 
