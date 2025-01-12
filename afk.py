@@ -1,3 +1,5 @@
+import cursor
+import getpass
 import atexit
 from pynput.mouse import Button, Controller as MouseController
 from pynput.keyboard import Key, Controller as KeyController, Listener
@@ -9,10 +11,13 @@ import cv2 as cv
 import pyautogui
 import numpy as np
 import ctypes
+from termcolor import colored
+
+
 
 mouse = MouseController()
 keyboard = KeyController()
-format = Figlet(font='Big')
+format = Figlet(font='Big', justify="center")
 user32 = ctypes.windll.user32
 
 # Mouse Movements with Ctypes
@@ -34,7 +39,7 @@ YELLOW = "\033[93m"
 PURPLE = "\033[95m"
 RESET = "\033[0m"
 
-creator = "Created By - Caden Warren"
+creator = f"{GREEN}Created By -{RESET} {YELLOW}Caden Warren{RESET}"
 
 mouse_command_list = ["180", "360", "720", "90Left", "90Right", "45Left", "45Right", "RandomTurnSmall"]
 key_command_list = ["Sprint", "SlideR", "SlideL", "Crouch", "LayDown", "Back", "Inspect", "Jump", "Slide", "SlideBack"]
@@ -138,10 +143,10 @@ def on_press(key):
     try:
         if key == Key.f7:
             force_paused = True
-            print("Waiting for action to end to pause..")
+            print("\n                     Waiting for action to end to pause..")
         elif key == Key.f8:
             force_paused = False
-            print("Resuming...")
+            print("Resuming...".center(80))
     except Exception as e:
         print(f"Error: {e}")
 
@@ -225,15 +230,18 @@ def ingame():
 
 def main():
     global paused
+    cursor.hide()
     header()
-    time.sleep(3)
-    input("\n\nPress Enter to continue...")
+    time.sleep(1)
+    getpass.getpass("\n\n                            Press Enter to continue...")
     clear_console()
+    cursor.show()
     mouse_enabled = enable_mouse()
+    cursor.hide()
 
 
     mouse.position = (960, 540)
-    time.sleep(3)
+    time.sleep(1)
     print("Waiting to get in a game...")
     while True: # Program Functionality Main Loop
         if not force_paused:
@@ -292,19 +300,19 @@ def main():
         
         
         clear_console()
-        print(format.renderText("PAUSED"))
+        print(colored(format.renderText("PAUSED"), "red"))
         while force_paused:
             if not force_paused:
                 clear_console()
-                print(format.renderText("RESUMED"))
-                print("Waiting to get in a game...")
+                print(colored(format.renderText("RESUMED"), "green"))
+                print("                           Waiting to get in a game...")
                 break
 
 
 
 def header():
-    print(format.renderText("  AFK   Bot"))
-    print(creator.center(43))
+    print(colored(format.renderText("  AFK   Bot"), "green"))
+    print(creator.center(100))
 
 def clear_console():
     if os.name == "nt":
@@ -493,11 +501,14 @@ def shoot(mouse_click_list):
         print("Dont Aim or Shoot")
         
 
+def cleanup():
+    listener.stop()
+    cursor.show()
 
 
 if __name__ == "__main__":
     listener = Listener(on_press=on_press)
     listener.start()
-    atexit.register(listener.stop)
+    atexit.register(cleanup)
     
     main()
