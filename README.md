@@ -65,4 +65,3 @@ Ensure your screen resolution matches the coordinates used in the script. Modify
 
 ## Acknowledgments
 Creator: Caden Warren
-Libraries Used: pynput, pyfiglet, opencv-python, pyautogui, numpy.
