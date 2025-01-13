@@ -2,6 +2,12 @@
 
 ![In Game Image](readme-imgs/ingame.png)
 
+## Video - Showcase + Tutorial
+> [!TIP]
+> https://youtu.be/s1o2fyUEcIo
+
+
+
 ## Overview
 
 Advanced automation bot for Black Ops 6. Simulates human-like behavior by performing mouse movements, keyboard actions, and screen detections, allowing you to stay active in the game.
