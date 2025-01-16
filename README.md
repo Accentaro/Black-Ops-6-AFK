@@ -76,7 +76,7 @@ Ensure your screen resolution matches the coordinates used in the script. Modify
 ## Important Notes
 - Customization: Adjust mouse sensitivity, regions, and thresholds for screen detection in the script as needed.
 - Safety: Use responsibly and comply with the terms of the game.
-- Supported Platforms: Windows is required due to dependencies like ctypes.
+- Supported Platforms: Windows (Black Ops 6 is not supported on Linux)
 
 ## Acknowledgments
 Creator: Caden Warren
