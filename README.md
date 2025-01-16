@@ -45,14 +45,15 @@ The script is fully configurable and utilizes Python libraries like `pynput, pyf
 
 ## Prerequisites
 
-1. **Python Libraries**  
+1. **Python Libraries**
+   in your preferred terminal: cd "'path/of/folder/'" # root path where all files are. Should see the requirements.txt here.
    Install the required libraries:
    pip install -r requirements.txt
 
-2. **Image References**
+3. **Image References**
 Ensure the cv references folder is installed. It contains the necessary reference images for in-game detection under cv references/in game/ and cv references/game results/
 
-3. **Screen Resolution**
+4. **Screen Resolution**
 Ensure your screen resolution matches the coordinates used in the script. Modify the regions if needed.
 
 ## How to Use
