@@ -48,8 +48,6 @@ The script is fully configurable and utilizes Python libraries like `pynput, pyf
 1. **Python Libraries**  
    Install the required libraries:
    pip install -r requirements.txt
-   or
-   pip install pynput pyfiglet opencv-python pyautogui numpy pillow
 
 2. **Image References**
 Ensure the cv references folder is installed. It contains the necessary reference images for in-game detection under cv references/in game/ and cv references/game results/
