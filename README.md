@@ -52,16 +52,18 @@ The script is fully configurable and utilizes Python libraries like `pynput, pyf
    Install the required libraries:
    pip install -r requirements.txt
 
-3. **Image References**
-Ensure the cv references folder is installed. It contains the necessary reference images for in-game detection under cv references/in game/ and cv references/game results/
+2. **Game Settings**
+   - Set game to Fullscreen Exclusive
+   - Set game display to 1920x1080
+   - Set game Interaface custom hud to 'Mission Interface' for best results
 
-4. **Screen Resolution**
+3. **Screen Resolution**
 Ensure your screen resolution matches the coordinates used in the script. Modify the regions if needed.
 
 ## How to Use
 - Clone or download this repository.
 - Follow Prerequisites
-- Run the script: afk.py
+- Run the script: afk.py or GUI.py
 - Follow on-screen instructions to enable or disable mouse movements.
 
 ## Custom App Icon
@@ -75,7 +77,7 @@ Ensure your screen resolution matches the coordinates used in the script. Modify
 - Feel free to move it to your desktop and change the name from 'afk.py - shortcut'
   
 ## Important Notes
-- Customization: Adjust mouse sensitivity, regions, and thresholds for screen detection in the script as needed.
+- Customization: Adjust sensitivity and the time it will wait pause commands after not seeing an in game image
 - Safety: Use responsibly and comply with the terms of the game.
 - Supported Platforms: Windows (Black Ops 6 is not supported on Linux)
 
