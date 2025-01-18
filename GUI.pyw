@@ -658,7 +658,10 @@ def ingame():
                 mouse.position = (192, 123)
                 mouse.press(Button.left)
                 mouse.release(Button.left)
-                time.sleep(2)
+                time.sleep(1)
+                mouse.press(Button.left)
+                mouse.release(Button.left)
+                time.sleep(1)
                 return True
         elif name == 'killcam':
             custom_threshold = .6  # Custom Threshold
