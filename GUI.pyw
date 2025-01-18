@@ -18,16 +18,29 @@ from tkinter import RAISED, SUNKEN, GROOVE, messagebox, filedialog
 from PIL import Image, ImageTk
 import csv
 import pygame
+import configparser
 
 pygame.mixer.init()
+config = configparser.ConfigParser()
 
 
 
 class App():
     def __init__(self):
-        self.dark = ["#2F3336", "#469FFC"] #Background, Buttons
-        self.light = "silver"
-        self.theme = self.dark
+        self.deaths = 0
+        self.losses = "Not yet implemented. Sorry!"
+        self.wins = "Not yet implemented. Sorry!"
+
+        self.light = ["silver", "green", "white"] #Background, Buttons, Header
+        self.dark = ["#2F3336", "#469FFC", "white"]
+        self.darker = ["#101010", "#1E90FF", "white"]
+        self.black = ["black", "black", "#00FF00"]
+        self.ocean = ["#001F3F", "#0074D9", "#1E90FF"]
+        self.retro = ["#002B36", "#FF00FF", "#00FF00"]
+        self.cyberpunk = ["#01002A", "#FF007F", "#04D8E6"]
+        self.gaming = ["#101010", "#32CD32", "#00FF00"]
+
+        self.theme = self.get_theme()
 
         sensitivity = self.get_sense()
         self.sensitivity = sensitivity
@@ -38,6 +51,30 @@ class App():
         self.root.resizable(False, False)
         self.root.title("AFK Bot")
         self.root.config(bg=self.theme[0])
+
+        self.menu = tk.Menu(self.root)
+        self.root.config(menu=self.menu)
+
+        self.theme_menu = tk.Menu(self.menu, tearoff=0)
+        self.menu.add_cascade(label="Themes", menu=self.theme_menu)
+        self.theme_menu.add_command(label="Light Mode", command=lambda :self.update_theme("light"))
+        self.theme_menu.add_command(label="Dark Mode", command=lambda :self.update_theme("dark"))
+        self.theme_menu.add_command(label="Darker Mode", command=lambda :self.update_theme("darker"))
+        self.theme_menu.add_command(label="Black", command=lambda :self.update_theme("black"))
+        self.theme_menu.add_command(label="Ocean", command=lambda :self.update_theme("ocean"))
+        self.theme_menu.add_command(label="Retro", command=lambda :self.update_theme("retro"))
+        self.theme_menu.add_command(label="Cyberpunk", command=lambda :self.update_theme("cyberpunk"))
+        self.theme_menu.add_command(label="Gaming", command=lambda :self.update_theme("gaming"))
+
+        self.stats_menu = tk.Menu(self.menu, tearoff=0)
+        self.menu.add_cascade(label="Stats", menu=self.stats_menu)
+        self.stats_menu.add_command(label="Session Stats", command=self.show_stats)
+        self.stats_menu.add_command(label="Total Stats", command=self.total_stats) 
+
+        self.help_menu = tk.Menu(self.menu, tearoff=0)
+        self.menu.add_cascade(label="Help", menu=self.help_menu)
+        self.help_menu.add_command(label="Tutorial", command=lambda :webbrowser.open("https://youtu.be/s1o2fyUEcIo?si=pykCorFvCZ8tSj_C"))
+
 
         six_image = Image.open("Icons\\6.ico")
         six_img_tk = ImageTk.PhotoImage(six_image)
@@ -70,7 +107,7 @@ class App():
         # )
         # self.shadow_label.place(x=380, y=65)
 
-        self.header = tk.Label(self.top_frame, text="AFK Bot", font=("Bebas Neue Regular", 48, "bold"), fg="#00FF00", bg=self.theme[1], bd=5, relief=GROOVE, highlightthickness=5, highlightbackground="black")
+        self.header = tk.Label(self.top_frame, text="AFK Bot", font=("Bebas Neue Regular", 48, "bold"), fg=self.theme[2], bg=self.theme[1], bd=5, relief=GROOVE, highlightthickness=5, highlightbackground="black")
         self.header.grid(row=0, column=1, pady=10, ipadx=20)
 
         self.creator = tk.Button(self.top_frame, text="Created By - Caden Warren", font=("Calibri", 16, "bold"), fg="white", bg=self.theme[1], relief=GROOVE, bd=4, highlightthickness=5, highlightbackground="black", command=lambda :webbrowser.open("https://linktr.ee/CainKEA"))
@@ -392,6 +429,83 @@ class App():
             except Exception:
                 messagebox.showerror("Error", "Failed to save")
 
+    def get_theme(self):
+        try:
+            with open("Assets\\Theme.txt", "r") as file:
+                theme = file.readline().strip()
+                if theme == "light":
+                    return self.light
+
+                elif theme == "dark":
+                    return self.dark
+
+                elif theme == "darker":
+                    return self.darker
+
+                elif theme == "black":
+                    return self.black
+
+                elif theme == "ocean":
+                    return self.ocean
+
+                elif theme == "retro":
+                    return self.retro
+                
+                elif theme == "cyberpunk":
+                    return self.cyberpunk
+
+                elif theme == "gaming":
+                    return self.gaming
+                
+
+                else:
+                    return self.dark
+        except Exception as e:
+            print(e)
+            return self.dark
+
+    def update_theme(self, theme):
+        try:
+            with open("Assets\\Theme.txt", "w") as file:
+                if theme == "light":
+                    file.write("light")
+
+                elif theme == "dark":
+                    file.write("dark")
+
+                elif theme == "darker":
+                    file.write("darker")
+
+                elif theme == "black":
+                    file.write("black")
+
+                elif theme == "ocean":
+                    file.write("ocean")
+
+                elif theme == "retro":
+                    file.write("retro")
+
+                elif theme == "cyberpunk":
+                    file.write("cyberpunk")
+                    
+                elif theme == "gaming":
+                    file.write("gaming")
+                
+                else:
+                    return
+                messagebox.showinfo("Theme Changed", "Theme will be applied next time the app starts")
+        except Exception:
+            return
+
+    def show_stats(self):
+        messagebox.showinfo("Current Stats", f"Deaths: {self.deaths}\nLosses: {self.losses}\nWins: {self.wins}")
+
+    def total_stats(self):
+        config.read('Assets\\Stats.ini')
+        total_deaths = config["STATS"]["deaths"]
+        total_losses = config["STATS"]["losses"]
+        total_wins = config["STATS"]["wins"]
+        messagebox.showinfo("Total Stats", f"Deaths: {total_deaths}\nLosses: {total_losses}\nWins: {total_wins}")
 
     def start_bot(self):
         self.start_btn.config(state="disabled")
@@ -583,9 +697,9 @@ def perform_kicked_actions():
 
 def on_press(key):
     try:
-        if key == Key.f7:
+        if key == Key.f7 and app.pause_btn['state'] != tk.DISABLED:
             app.pause_bot()
-        elif key == Key.f8:
+        elif key == Key.f8 and app.resume_btn['state'] != tk.DISABLED:
             app.resume_bot()
     except Exception as e:
         showText(f"Error: {e}")
@@ -671,7 +785,25 @@ def ingame():
                 # skip killcam
                 keyboard.press("e")
                 keyboard.release("e")
+                
+                app.deaths += 1
+                try:
+                    config.read('Assets\\Stats.ini')
+                    if 'STATS' in config and 'deaths' in config['STATS']:
+                        config['STATS']['deaths'] = str(int(config['STATS']['deaths']) + 1)
+                    else:
+                        if 'STATS' not in config:
+                            config['STATS'] = {}
+                        config['STATS']['deaths'] = '1'
+
+                    with open('Assets\\Stats.ini', 'w') as configfile:
+                        config.write(configfile)
+                except Exception:
+                    pass
+                
                 return True
+                
+
         else:
             if check_image_in_region(img, region):
                 showText(f"{name} detected in its region!")
