@@ -2,6 +2,12 @@
 
 ![In Game Image](readme-imgs/ingame.png)
 
+## Video - Showcase + Tutorial
+> [!TIP]
+> https://youtu.be/s1o2fyUEcIo
+
+
+
 ## Overview
 
 Advanced automation bot for Black Ops 6. Simulates human-like behavior by performing mouse movements, keyboard actions, and screen detections, allowing you to stay active in the game.
@@ -39,16 +45,15 @@ The script is fully configurable and utilizes Python libraries like `pynput, pyf
 
 ## Prerequisites
 
-1. **Python Libraries**  
+1. **Python Libraries**
+   in your preferred terminal: cd "'path/of/folder/'" # root path where all files are. Should see the requirements.txt here.
    Install the required libraries:
    pip install -r requirements.txt
-   or
-   pip install pynput pyfiglet opencv-python pyautogui numpy pillow
 
-2. **Image References**
+3. **Image References**
 Ensure the cv references folder is installed. It contains the necessary reference images for in-game detection under cv references/in game/ and cv references/game results/
 
-3. **Screen Resolution**
+4. **Screen Resolution**
 Ensure your screen resolution matches the coordinates used in the script. Modify the regions if needed.
 
 ## How to Use
@@ -70,7 +75,7 @@ Ensure your screen resolution matches the coordinates used in the script. Modify
 ## Important Notes
 - Customization: Adjust mouse sensitivity, regions, and thresholds for screen detection in the script as needed.
 - Safety: Use responsibly and comply with the terms of the game.
-- Supported Platforms: Windows is required due to dependencies like ctypes.
+- Supported Platforms: Windows (Black Ops 6 is not supported on Linux)
 
 ## Acknowledgments
 Creator: Caden Warren
