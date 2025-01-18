@@ -6,7 +6,9 @@
 > [!TIP]
 > https://youtu.be/s1o2fyUEcIo
 
-
+# NEW: AFK Bot V3 - GUI Update
+![GUI](readme-imgs/GUIroot.png)
+![GUI Settings](readme-imgs/GUIsettings.png)
 
 ## Overview
 
