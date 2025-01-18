@@ -75,6 +75,10 @@ class App():
         self.menu.add_cascade(label="Help", menu=self.help_menu)
         self.help_menu.add_command(label="Tutorial", command=lambda :webbrowser.open("https://youtu.be/s1o2fyUEcIo?si=pykCorFvCZ8tSj_C"))
 
+        self.donate_menu = tk.Menu(self.menu, tearoff=0)
+        self.menu.add_cascade(label="Donate", menu=self.donate_menu)
+        self.donate_menu.add_command(label="Cash App", command=lambda :webbrowser.open("https://cash.app/$CadenWarren42"))
+
 
         six_image = Image.open("Icons\\6.ico")
         six_img_tk = ImageTk.PhotoImage(six_image)
