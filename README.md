@@ -52,6 +52,9 @@ The script is fully configurable and utilizes Python libraries like `pynput, pyf
    Install the required libraries:
    pip install -r requirements.txt
 
+2. **Fonts**
+   - Place the fonts from the fonts folder in your Control Panel/Fonts
+  
 2. **Game Settings**
    - Set game to Fullscreen Exclusive
    - Set game display to 1920x1080
