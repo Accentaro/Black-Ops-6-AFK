@@ -680,7 +680,7 @@ def check_kicked(frame):
 
     result = cv.matchTemplate(frame, kicked_img, cv.TM_CCOEFF_NORMED)
     _, max_val, _, _ = cv.minMaxLoc(result)
-    threshold = 0.75  # Adjust the threshold as needed
+    threshold = 0.5  # Adjust the threshold as needed
     return max_val > threshold
 
 def perform_kicked_actions():
