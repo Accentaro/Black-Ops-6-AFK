@@ -48,7 +48,8 @@ The script is fully configurable and utilizes Python libraries like `pynput, pyf
 ## Prerequisites
 
 1. **Python Libraries**
-   - In your preferred terminal use command: cd "path/of/folder/"  # root path where all files are. Should see the requirements.txt here.
+   - In your preferred terminal use command: cd "path/of/folder/"
+   > The path is the root directory where all the files are. Should see the requirements.txt here.
    - Install the required libraries with: pip install -r requirements.txt
 
 2. **Fonts**
