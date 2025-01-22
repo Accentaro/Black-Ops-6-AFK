@@ -114,7 +114,7 @@ class App():
         self.header = tk.Label(self.top_frame, text="AFK Bot", font=("Bebas Neue Regular", 48, "bold"), fg=self.theme[2], bg=self.theme[1], bd=5, relief=GROOVE, highlightthickness=5, highlightbackground="black")
         self.header.grid(row=0, column=1, pady=10, ipadx=20)
 
-        self.creator = tk.Button(self.top_frame, text="Created By - Caden Warren", font=("Calibri", 16, "bold"), fg="white", bg=self.theme[1], relief=GROOVE, bd=4, highlightthickness=5, highlightbackground="black", command=lambda :webbrowser.open("https://linktr.ee/CainKEA"))
+        self.creator = tk.Button(self.top_frame, text="Created By - Caden Warren", font=("Calibri", 16, "bold"), fg="white", bg=self.theme[1], relief=GROOVE, bd=4, highlightthickness=5, highlightbackground="black", command=lambda :webbrowser.open("https://github.com/cw-0"))
         self.creator.bind("<Button-1>", self.click_sound)
         self.creator.bind("<Enter>", self.hover_effect)
         self.creator.bind("<Leave>", self.leave_effect)
