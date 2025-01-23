@@ -49,7 +49,7 @@ class App():
         self.root = tk.Tk()
         self.root.geometry("900x650")
         self.root.resizable(False, False)
-        self.root.title("AFK Bot")
+        self.root.title("Stat Tracker")
         self.root.config(bg=self.theme[0])
 
         self.menu = tk.Menu(self.root)
